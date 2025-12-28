@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './about.scss'
 import Logo from '../../imgs/logo.png'
+import { useLanguage } from '../../context/LanguageContext' // Context import qilish
 
 const About = () => {
+  const { translations } = useLanguage() // Tarjimalarni olish
   const imgRef = useRef(null)
   const aboutRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -38,7 +40,9 @@ const About = () => {
 
   return (
     <div className='about' ref={aboutRef} id="about">
-      <h1 className={`about-title ${isVisible ? 'visible' : ''}`}>Biz haqimizda</h1>
+      <h1 className={`about-title ${isVisible ? 'visible' : ''}`}>
+        {translations.aboutTitle || "Biz haqimizda"}
+      </h1>
 
       <div className='container-about'>
         <div className='image-wrapper'>
@@ -51,18 +55,22 @@ const About = () => {
         </div>
 
         <div className={`about-text ${isVisible ? 'visible' : ''}`}>
-          <h2>O'zbekiston ayollar va qizlar uyushmasi</h2>
+          <h2>{translations.aboutOrganizationName || "O'zbekiston ayollar va qizlar uyushmasi"}</h2>
           <p>
-            O'zbekiston ayollar va qizlar uyushmasi – davlat ro'yxatidan
-            2021-yil 15-iyulda belgilangan tartibda O'zbekiston Respublikasi
-            Adliya vazirligida ro'yxatdan o'tdi. 2021-yil 24-avgustda Nodavlat
-            notijorat tashkilotining ramzi davlat ro'yxatidan o'tdi.
+            {translations.aboutDescription1 || 
+              "O'zbekiston ayollar va qizlar uyushmasi – davlat ro'yxatidan " +
+              "2021-yil 15-iyulda belgilangan tartibda O'zbekiston Respublikasi " +
+              "Adliya vazirligida ro'yxatdan o'tdi. 2021-yil 24-avgustda Nodavlat " +
+              "notijorat tashkilotining ramzi davlat ro'yxatidan o'tdi."
+            }
           </p>
           <p className='additional-text'>
-            Uyushma ayollarning huquq va imkoniyatlarini himoya qilish, 
-            ularning ijtimoiy-iqtisodiy faolligini oshirish, 
-            ta'lim va sog'liqni saqlash sohalarida yordam ko'rsatish 
-            maqsadida faoliyat yuritadi.
+            {translations.aboutDescription2 || 
+              "Uyushma ayollarning huquq va imkoniyatlarini himoya qilish, " +
+              "ularning ijtimoiy-iqtisodiy faolligini oshirish, " +
+              "ta'lim va sog'liqni saqlash sohalarida yordam ko'rsatish " +
+              "maqsadida faoliyat yuritadi."
+            }
           </p>
         </div>
       </div>
@@ -70,4 +78,4 @@ const About = () => {
   )
 }
 
-export default About  
+export default About
